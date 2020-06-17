@@ -37,6 +37,9 @@ class ActionController extends BaseController
         $check = VigReactions::where('session_id', $session_id)->where('type', $request->type)->get();
         if($check->count() == 0) {
             $reaction = $this->vigReactionsRepository->create($request->input());
+        } else {
+            $reaction = ['type' => $check->first()->type, 'error' => true];
+            $check->first()->delete();
         }
         return response()->json($reaction);
     }
