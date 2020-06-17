@@ -11,14 +11,15 @@
 }
 
 .rect {
-    background-color: white;
-    border-radius: 90px;
-    overflow: hidden;
     -webkit-animation: rec .2s ease-in-out;
     animation: rec .2s ease-in-out;
     height: 100%;
     -webkit-box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+}
+
+.vigreaction{
+    margin-bottom: 27px;
 }
 
 

@@ -1,10 +1,10 @@
 
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<div class="row">
-    <div class="col-xs-12">
-        <div class="wrap">
-            <div class="rect">
+<div class="wrap">
+    <div class="rect">
+        <div class="row">
+            <div class="col-xs-12">
                 <input type="hidden" id="reaction_id" value="{{ $content[0] }}">
                 <input type="hidden" id="reaction_type" value="{{ $content[1] }}">
                 <div class="col-xs-2" style="text-align:center">

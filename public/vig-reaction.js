@@ -21,71 +21,18 @@ $('.vigreaction').on('click', function(){
             type: type,
         },
         success: function(data){
-            if(data.type == 'like') {
-                var count = $('#vig-reaction-like').data('count');
-                if(data.error) {
-                    count = count - 1;
-                } else {
-                    count = count + 1;
-                }
-                $('#vig-reaction-like').html(count);
-                $('#vig-reaction-like').data('count', count);
+            console.log(data);
+            var count = $('#vig-reaction-'+data.type).data('count');
+            if(!data.action) count = count + 1;
+            if(data.action == 'delete') count = count - 1;
+            if(data.action == 'update') {
+                old_count = $('#vig-reaction-'+data.old_type).data('count') - 1;
+                count = count + 1;
+                $('#vig-reaction-'+data.old_type).html(old_count);
+                $('#vig-reaction-'+data.old_type).data('count', old_count);
             }
-
-            if(data.type == 'love') {
-                var count = $('#vig-reaction-love').data('count');
-                if(data.error) {
-                    count = count - 1;
-                } else {
-                    count = count + 1;
-                }
-                $('#vig-reaction-love').html(count);
-                $('#vig-reaction-love').data('count', count);
-            }
-
-            if(data.type == 'haha') {
-                var count = $('#vig-reaction-haha').data('count');
-                if(data.error) {
-                    count = count - 1;
-                } else {
-                    count = count + 1;
-                }
-                $('#vig-reaction-haha').html(count);
-                $('#vig-reaction-haha').data('count', count);
-            }
-
-            if(data.type == 'wow') {
-                var count = $('#vig-reaction-wow').data('count');
-                if(data.error) {
-                    count = count - 1;
-                } else {
-                    count = count + 1;
-                }
-                $('#vig-reaction-wow').html(count);
-                $('#vig-reaction-wow').data('count', count);
-            }
-
-            if(data.type == 'sad') {
-                var count = $('#vig-reaction-sad').data('count');
-                if(data.error) {
-                    count = count - 1;
-                } else {
-                    count = count + 1;
-                }
-                $('#vig-reaction-sad').html(count);
-                $('#vig-reaction-sad').data('count', count);
-            }
-
-            if(data.type == 'angry') {
-                var count = $('#vig-reaction-angry').data('count');
-                if(data.error) {
-                    count = count - 1;
-                } else {
-                    count = count + 1;
-                }
-                $('#vig-reaction-angry').html(count);
-                $('#vig-reaction-angry').data('count', count);
-            }
+            $('#vig-reaction-'+data.type).html(count);
+            $('#vig-reaction-'+data.type).data('count', count);
         }
     })
 })

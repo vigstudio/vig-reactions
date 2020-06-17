@@ -34,14 +34,20 @@ class ActionController extends BaseController
         $request->merge([
             'session_id' => $session_id
         ]);
-        $check = VigReactions::where('session_id', $session_id)->where('type', $request->type)->get();
-        if($check->count() == 0) {
+        $query = VigReactions::where('session_id', $session_id)->get();
+
+        if($query->count() == 0) {
             $reaction = $this->vigReactionsRepository->create($request->input());
+        } else if($query->first()->type !== $request->input('type')) {
+            $old_type = $query->first()->type;
+            $query->first()->update($request->input());
+            $reaction = ['old_type' => $old_type, 'action' => 'update', 'type' => $query->first()->type];
         } else {
-            $reaction = ['type' => $check->first()->type, 'error' => true];
-            $check->first()->delete();
+            $reaction = ['type' => $query->first()->type, 'action' => 'delete'];
+            $query->first()->delete();
         }
         return response()->json($reaction);
     }
+
 
 }
