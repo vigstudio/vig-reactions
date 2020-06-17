@@ -30,6 +30,7 @@ class ActionController extends BaseController
     {
         $reaction = $this->vigReactionsRepository->create($request->input());
         return response()->json($reaction);
+
     }
 
 }
