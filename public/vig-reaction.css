@@ -1,0 +1,201 @@
+.wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.rect {
+    background-color: white;
+    border-radius: 90px;
+    overflow: hidden;
+    -webkit-animation: rec .2s ease-in-out;
+    animation: rec .2s ease-in-out;
+    height: 100%;
+    -webkit-box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+}
+
+
+@-webkit-keyframes rec {
+    0% {
+        -webkit-transform: translate(0px, 400px);
+        transform: translate(0px, 400px);
+    }
+    100% {
+        -webkit-transform: translate(0px, 0px);
+        transform: translate(0px, 0px);
+    }
+}
+
+
+@keyframes rec {
+    0% {
+        -webkit-transform: translate(0px, 400px);
+        transform: translate(0px, 400px);
+    }
+    100% {
+        -webkit-transform: translate(0px, 0px);
+        transform: translate(0px, 0px);
+    }
+}
+
+.circle {
+    width: 80%;
+    -webkit-transition: .2s ease all;
+    transition: .2s ease all;
+    -webkit-animation: emo .3s ease-in-out.1s;
+    animation: emo .3s ease-in-out.1s;
+}
+
+.circle:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.dislike {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.dislike:hover {
+    -webkit-transform: scale(1.5) rotate(180deg);
+    transform: scale(1.5) rotate(180deg);
+}
+
+@-webkit-keyframes emo {
+    0% {
+        -webkit-transform: scale(5) translate(0px, -1px);
+        transform: scale(5) translate(0px, 400px);
+    }
+    100% {
+        -webkit-transform: scale(1) translate(0px, 0px);
+        transform: scale(1) translate(0px, 0px);
+    }
+}
+
+@keyframes emo {
+    0% {
+        -webkit-transform: scale(5) translate(0px, -1px);
+        transform: scale(5) translate(0px, 400px);
+    }
+    100% {
+        -webkit-transform: scale(1) translate(0px, 0px);
+        transform: scale(1) translate(0px, 0px);
+    }
+}
+
+.logo {
+    margin-top: -150px;
+    margin-left: -15px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0px);
+    transform: perspective(1px) translateZ(0px);
+    -webkit-box-shadow: 0 0 1px transparent;
+    box-shadow: 0 0 1px transparent;
+    height: 100px;
+    position: absolute;
+}
+
+.logo:hover,
+.logo:focus,
+.logo:active {
+    -webkit-animation-name: logo;
+    animation-name: logo;
+    -webkit-animation-duration: 0.15s;
+    animation-duration: 0.15s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    cursor: wait;
+}
+
+@-webkit-keyframes logo {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+
+@keyframes logo {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+
+@media (min-width: 426px) and (max-width: 650px) {
+    .rect {
+        height: 60px;
+    }
+    .circle {
+        height: 60px;
+        width: 60px;
+    }
+    .logo {
+        height: 60px;
+        margin-top: -90px;
+        margin-left: -12px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .rect {
+        height: 50px;
+    }
+    .circle {
+        height: 50px;
+        width: 50px;
+    }
+    .logo {
+        height: 50px;
+        margin-top: -80px;
+        margin-left: -10px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .rect {
+        height: 50px;
+    }
+    .circle {
+        height: 49px;
+        width: 49px;
+    }
+    .logo {
+        height: 50px;
+        margin-top: -80px;
+        margin-left: -10px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .rect {
+        height: 40px;
+    }
+    .circle {
+        height: 40px;
+        width: 40px;
+    }
+    .logo {
+        height: 40px;
+        margin-top: -70px;
+        margin-left: -5px;
+    }
+}
