@@ -22,8 +22,11 @@ class VigReactions extends BaseModel
      */
     protected $fillable = [
         'type',
+        'session_id',
         'reaction_id',
-        'reaction_type'
+        'reaction_type',
+        'user_id',
+        'user_type'
     ];
 
 }

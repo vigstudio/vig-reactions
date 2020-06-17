@@ -7,8 +7,10 @@ use Botble\Base\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Exception;
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use Botble\VigReactions\Models\VigReactions;
 use Illuminate\Session\Store;
 use Session;
+use Eloquent;
 
 class ActionController extends BaseController
 {
@@ -28,9 +30,15 @@ class ActionController extends BaseController
 
     public function pressReaction(Request $request)
     {
-        $reaction = $this->vigReactionsRepository->create($request->input());
+        $session_id = Session::getId();
+        $request->merge([
+            'session_id' => $session_id
+        ]);
+        $check = VigReactions::where('session_id', $session_id)->where('type', $request->type)->get();
+        if($check->count() == 0) {
+            $reaction = $this->vigReactionsRepository->create($request->input());
+        }
         return response()->json($reaction);
-
     }
 
 }
