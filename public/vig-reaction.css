@@ -91,54 +91,6 @@
     }
 }
 
-.logo {
-    margin-top: -150px;
-    margin-left: -15px;
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0px);
-    transform: perspective(1px) translateZ(0px);
-    -webkit-box-shadow: 0 0 1px transparent;
-    box-shadow: 0 0 1px transparent;
-    height: 100px;
-    position: absolute;
-}
-
-.logo:hover,
-.logo:focus,
-.logo:active {
-    -webkit-animation-name: logo;
-    animation-name: logo;
-    -webkit-animation-duration: 0.15s;
-    animation-duration: 0.15s;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    cursor: wait;
-}
-
-@-webkit-keyframes logo {
-    50% {
-        -webkit-transform: translateX(3px) rotate(2deg);
-        transform: translateX(3px) rotate(2deg);
-    }
-    100% {
-        -webkit-transform: translateX(-3px) rotate(-2deg);
-        transform: translateX(-3px) rotate(-2deg);
-    }
-}
-
-@keyframes logo {
-    50% {
-        -webkit-transform: translateX(3px) rotate(2deg);
-        transform: translateX(3px) rotate(2deg);
-    }
-    100% {
-        -webkit-transform: translateX(-3px) rotate(-2deg);
-        transform: translateX(-3px) rotate(-2deg);
-    }
-}
 
 @media (min-width: 426px) and (max-width: 650px) {
     .rect {
@@ -147,11 +99,6 @@
     .circle {
         height: 60px;
         width: 60px;
-    }
-    .logo {
-        height: 60px;
-        margin-top: -90px;
-        margin-left: -12px;
     }
 }
 
@@ -163,11 +110,6 @@
         height: 50px;
         width: 50px;
     }
-    .logo {
-        height: 50px;
-        margin-top: -80px;
-        margin-left: -10px;
-    }
 }
 
 @media screen and (max-width: 375px) {
@@ -178,11 +120,6 @@
         height: 49px;
         width: 49px;
     }
-    .logo {
-        height: 50px;
-        margin-top: -80px;
-        margin-left: -10px;
-    }
 }
 
 @media screen and (max-width: 320px) {
@@ -192,10 +129,5 @@
     .circle {
         height: 40px;
         width: 40px;
-    }
-    .logo {
-        height: 40px;
-        margin-top: -70px;
-        margin-left: -5px;
     }
 }
