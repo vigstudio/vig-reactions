@@ -21,7 +21,6 @@ $('.vigreaction').on('click', function(){
             type: type,
         },
         success: function(data){
-            console.log(data);
             var count = $('#vig-reaction-'+data.type).data('count');
             if(!data.action) count = count + 1;
             if(data.action == 'delete') count = count - 1;
