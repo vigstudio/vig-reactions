@@ -31,9 +31,23 @@ class ActionController extends BaseController
     public function pressReaction(Request $request)
     {
         $session_id = Session::getId();
-        $request->merge([
-            'session_id' => $session_id
-        ]);
+
+        if(auth()->guard('member')->check()) {
+            $request->merge([
+                'session_id'    => $session_id,
+                'user_id'       => auth()->guard('member')->id(),
+                'user_type'     => get_class(auth()->guard('member')->user())
+            ]);
+        }
+
+        if(auth()->check()) {
+            $request->merge([
+                'session_id'    => $session_id,
+                'user_id'       => auth()->id(),
+                'user_type'     => get_class(auth()->user())
+            ]);
+        }
+
         $query = VigReactions::where('session_id', $session_id)
                                 ->where('reaction_id', $request->input('reaction_id'))
                                 ->where('reaction_type', $request->input('reaction_type'))
