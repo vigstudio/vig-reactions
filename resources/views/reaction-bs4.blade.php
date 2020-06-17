@@ -57,11 +57,11 @@
 @php
 
     Theme::asset()
-             ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction.css');
+             ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction-v105.css');
     Theme::asset()
              ->container('footer')
              ->add('tippy', 'https://unpkg.com/tippy.js@2.1.1/dist/tippy.all.min.js');
     Theme::asset()
             ->container('footer')
-            ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction.js');
+            ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction-v105.js');
 @endphp

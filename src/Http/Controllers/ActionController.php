@@ -34,7 +34,10 @@ class ActionController extends BaseController
         $request->merge([
             'session_id' => $session_id
         ]);
-        $query = VigReactions::where('session_id', $session_id)->get();
+        $query = VigReactions::where('session_id', $session_id)
+                                ->where('reaction_id', $request->input('reaction_id'))
+                                ->where('reaction_type', $request->input('reaction_type'))
+                                ->get();
 
         if($query->count() == 0) {
             $reaction = $this->vigReactionsRepository->create($request->input());
