@@ -7,6 +7,7 @@ use Botble\Base\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Exception;
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use Botble\VigReactions\Http\Requests\VigReactionsRequest;
 use Botble\VigReactions\Models\VigReactions;
 use Illuminate\Session\Store;
 use Session;
@@ -32,6 +33,10 @@ class ActionController extends BaseController
     {
         $session_id = Session::getId();
 
+        if(is_null($session_id)) {
+            return response()->json(['error' => true]);
+        }
+
         if(auth()->guard('member')->check()) {
             $request->merge([
                 'session_id'    => $session_id,
@@ -54,12 +59,7 @@ class ActionController extends BaseController
                                 ->get();
 
         if($query->count() == 0) {
-            if($session_id) {
-                $reaction = $this->vigReactionsRepository->create($request->input());
-            } else {
-                $reaction = ['error' => true];
-            }
-
+            $reaction = $this->vigReactionsRepository->create($request->input());
         } else if($query->first()->type !== $request->input('type')) {
             $old_type = $query->first()->type;
             $query->first()->update($request->input());
