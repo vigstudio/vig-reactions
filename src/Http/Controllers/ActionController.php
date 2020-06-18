@@ -28,9 +28,12 @@ class ActionController extends BaseController
         $this->session = $session;
     }
 
-    public function pressReaction(Request $request)
+    public function pressReaction(VigReactionsRequest $request)
     {
         $session_id = Session::getId();
+        if(is_null($session_id)) {
+            return ['status' => 'error'];
+        }
 
         if(auth()->guard('member')->check()) {
             $request->merge([

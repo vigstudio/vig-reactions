@@ -17,8 +17,7 @@ class VigReactionsRequest extends Request
     public function rules()
     {
         return [
-            'name'   => 'required',
-            'status' => Rule::in(BaseStatusEnum::values()),
+            'type'   => 'required',
         ];
     }
 }
