@@ -31,9 +31,6 @@ class ActionController extends BaseController
     public function pressReaction(VigReactionsRequest $request)
     {
         $session_id = Session::getId();
-        if(is_null($session_id)) {
-            return ['status' => 'error'];
-        }
 
         if(auth()->guard('member')->check()) {
             $request->merge([
@@ -57,7 +54,12 @@ class ActionController extends BaseController
                                 ->get();
 
         if($query->count() == 0) {
-            $reaction = $this->vigReactionsRepository->create($request->input());
+            if($session_id) {
+                $reaction = $this->vigReactionsRepository->create($request->input());
+            } else {
+                $reaction = ['error' => true];
+            }
+
         } else if($query->first()->type !== $request->input('type')) {
             $old_type = $query->first()->type;
             $query->first()->update($request->input());
