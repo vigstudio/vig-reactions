@@ -39,28 +39,34 @@ class ActionController extends BaseController
 
         $request->merge($this->mergeRequest($session_id));
 
-        $query = $this->vigReactionsRepository->select(['*'], [
-            'session_id'    => $session_id,
-            'reaction_id'   => $request->input('reaction_id'),
-            'reaction_type' => $request->input('reaction_type')
-        ]);
+        $query = VigReactions::where('session_id', $session_id)
+                            ->where('reaction_id', $request->input('reaction_id'))
+                            ->where('reaction_type', $request->input('reaction_type'))
+                            ->get();
 
-        $reaction = $this->createOrUpdate($query, $request);
+        $reaction = $this->createOrUpdateReaction($query, $request);
 
         return response()->json($reaction);
     }
 
-    public function createOrUpdate($query, $request)
+    public function createOrUpdateReaction($query, $request)
     {
         if($query->count() == 0) {
-            $result = $this->vigReactionsRepository->create($request->input());
+
+            $create = $this->vigReactionsRepository->create($request->input());
+            $result = ['type' => $create->type, 'action' => 'create'];
+
         } else if($query->first()->type !== $request->input('type')) {
+
             $old_type = $query->first()->type;
             $query->first()->update($request->input());
             $result = ['old_type' => $old_type, 'action' => 'update', 'type' => $query->first()->type];
+
         } else {
+
             $result = ['type' => $query->first()->type, 'action' => 'delete'];
             $query->first()->delete();
+
         }
         return $result;
     }

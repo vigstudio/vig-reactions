@@ -22,7 +22,7 @@ $('.vigreaction').on('click', function(){
         },
         success: function(data){
             var count = $('#vig-reaction-'+data.type).data('count');
-            if(!data.action) count = count + 1;
+            if(data.action == 'create') count = count + 1;
             if(data.action == 'delete') count = count - 1;
             if(data.action == 'update') {
                 old_count = $('#vig-reaction-'+data.old_type).data('count') - 1;
