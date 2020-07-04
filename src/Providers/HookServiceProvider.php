@@ -23,12 +23,8 @@ class HookServiceProvider extends ServiceProvider
         $content = explode(" ",$query->content);
         $reations = VigReactions::where('reaction_id', $content[0])
                                 ->where('reaction_type', $content[1])->get();
-        if($content[2] == 'bs4') {
-            return view('plugins/vig-reactions::reaction-bs4', compact('content', 'reations'));
-        }
-        if($content[2] == 'bs3') {
-            return view('plugins/vig-reactions::reaction', compact('content', 'reations'));
-        }
+
+        return view('plugins/vig-reactions::reaction', compact('content', 'reations'));
 
     }
 
