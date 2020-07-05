@@ -54,17 +54,27 @@ class ActionController extends BaseController
         if($query->count() == 0) {
 
             $create = $this->vigReactionsRepository->create($request->input());
-            $result = ['type' => $create->type, 'action' => 'create'];
+            $result = [
+                'type' => $create->type,
+                'action' => 'create'
+            ];
 
         } else if($query->first()->type !== $request->input('type')) {
 
             $old_type = $query->first()->type;
             $query->first()->update($request->input());
-            $result = ['old_type' => $old_type, 'action' => 'update', 'type' => $query->first()->type];
+            $result = [
+                'old_type' => $old_type,
+                'action' => 'update',
+                'type' => $query->first()->type
+            ];
 
         } else {
 
-            $result = ['type' => $query->first()->type, 'action' => 'delete'];
+            $result = [
+                'type' => $query->first()->type,
+                'action' => 'delete'
+            ];
             $query->first()->delete();
 
         }
@@ -79,6 +89,9 @@ class ActionController extends BaseController
         } else if(auth()->check()) {
             $user_id = auth()->id();
             $user_type = get_class(auth()->user());
+        } else {
+            $user_id = NULL;
+            $user_type = NULL;
         }
 
         return [
