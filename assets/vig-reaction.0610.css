@@ -16,6 +16,12 @@
     }
   }
 
+  .box-reaction {
+    height: 100px;
+    background-color:#ecf0f1;
+    border-radius: 5px;
+  }
+
   .dw-reactions {
     font-family: Arial, sans-serif;
     margin: 10px 0;
@@ -328,7 +334,8 @@
   }
 
   .dw-reactions-3 .dw-reactions-percent{
-      background: #e74c3c
+      background: #e74c3c;
+      border-radius: 5px;
   }
 
   .dw-reactions-3 .dw-reactions-icon{
@@ -345,6 +352,14 @@
 
   .dw-reactions-3 .dw-reactions-icon:hover{
 
+  }
+
+  .dw-reactions-count-3 {
+    display: block;
+    background-color: #e74c3c;
+    border-radius: 5px;
+    position: relative;
+    bottom: 20px;
   }
 
   .dw-reactions-3 .dw-reactions-icon:hover img{

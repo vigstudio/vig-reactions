@@ -20,12 +20,8 @@ class HookServiceProvider extends ServiceProvider
 
     public function render($query)
     {
-        $content = explode(" ",$query->content);
-        $reations = VigReactions::where('reaction_id', $content[0])
-                                ->where('reaction_type', $content[1])->get();
-
-        return view('plugins/vig-reactions::reaction', compact('content', 'reations'));
-
+        $content = $query->content;
+        return view('plugins/vig-reactions::reaction', compact('content'));
     }
 
 }

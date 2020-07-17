@@ -6,14 +6,14 @@ function vigPercent(number) {
 function setAllPercent(reaction)
 {
     var count       = parseInt($('#vig-reaction-'+reaction).attr('data-count'));
-    var percent     = vigPercent(count);
+    var percent     = vigPercent(count) ? vigPercent(count) : 0;
     $({ Counter: 0 }).animate({
         Counter: percent
     }, {
         duration: 1000,
         easing: 'swing',
         step: function() {
-            $('#vig-percent-'+reaction).prop('style', 'height:'+Math.ceil(this.Counter)+'px');
+            $('#vig-percent-'+reaction).prop('style', 'height:'+Math.ceil(this.Counter)+'px; position: relative; top: '+ (100-Math.ceil(this.Counter))+'px;' );
         }
     });
 
