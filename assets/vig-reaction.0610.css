@@ -360,6 +360,7 @@
     border-radius: 5px;
     position: relative;
     bottom: 20px;
+    color: #eee;
   }
 
   .dw-reactions-3 .dw-reactions-icon:hover img{

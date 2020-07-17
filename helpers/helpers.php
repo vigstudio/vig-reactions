@@ -7,16 +7,8 @@ if (!function_exists('get_vig_reaction')) {
      * @param array $with
      * @return array
      */
-    function get_vig_reaction($slugable)
+    function get_vig_reaction($type, $id)
     {
-        $slug = json_decode($slugable);
-        if($slug) {
-            $id = $slug->reference_id;
-            $type = $slug->reference_type;
-        } else {
-            $id = NULL;
-            $type = NULL;
-        }
         return VigReactions::where('reaction_id', $id)->where('reaction_type', $type)->get();
     }
 }

@@ -3,7 +3,15 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @php
-    $reactions  = get_vig_reaction($content);
+    $slug = json_decode($content);
+    if($slug) {
+        $id = $slug->reference_id;
+        $type = $slug->reference_type;
+    } else {
+        $id = NULL;
+        $type = NULL;
+    }
+    $reactions  = get_vig_reaction($type, $id);
     $like       = count_vig_reaction($reactions, 'like');
     $love       = count_vig_reaction($reactions, 'love');
     $haha       = count_vig_reaction($reactions, 'haha');
@@ -13,10 +21,10 @@
     $total      = count_vig_reaction($reactions);
 @endphp
 
-<div class="dw-reactions-3"
+<div class="dw-reactions-3" style="padding-top: 20px"
         id="vig-reaction"
-        data-id="{{ $reactions->first()->reaction_id }}"
-        data-type="{{ $reactions->first()->reaction_type }}"
+        data-id="{{ $id }}"
+        data-type="{{ $type }}"
         data-total="{{ $total }}" data-session="{{ Session::getId() }}">
     <div class="dw-reactions-box-3">
         <div class="box-reaction">
@@ -94,7 +102,7 @@
 @php
 
     Theme::asset()
-             ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction.min.v1.css', [], [], '1.1.0');
+             ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction.min.v1.css', [], [], '1.1.1');
     Theme::asset()
             ->container('footer')
             ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/vig-reaction.min.v1.js', [], [], '1.1.0');
