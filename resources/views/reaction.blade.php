@@ -21,6 +21,7 @@
     $total      = count_vig_reaction($reactions);
 @endphp
 
+
 <div class="dw-reactions-3" style="padding-top: 20px"
         id="vig-reaction"
         data-id="{{ $id }}"
