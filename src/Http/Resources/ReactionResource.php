@@ -17,10 +17,8 @@ class ReactionResource extends JsonResource
     {
         return [
             'type'                  => $this->type,
-            'reactable'             => $this->reactable,
             'reactable_summary'     => $this->reactable->reactionSummary(),
             'reactable_total'       => $this->reactable->reactionTotal(),
-            'responder'             => $this->responder,
         ];
     }
 }

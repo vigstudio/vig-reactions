@@ -33,7 +33,7 @@ class ActionController extends BaseController
     {
         $data = $request->input('reaction_type')::find($request->input('reaction_id'));
 
-        $react = $data->reactions;
+        $react = $data->reactions?->first();
 
         return $response->setData(new ReactionResource($react))->toApiResponse();
     }

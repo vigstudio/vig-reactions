@@ -15,7 +15,7 @@ Route::group(['namespace' => 'Botble\VigReactions\Http\Controllers', 'middleware
     });
 
     Route::group(['prefix' => 'reaction'], function () {
-        Route::post('get-reaction', 'ActionController@pressReaction')->name('vig.reaction.get');
+        Route::post('get-reaction', 'ActionController@getReaction')->name('vig.reaction.get');
         Route::post('press-reaction', 'ActionController@pressReaction')->name('vig.reaction.press');
     });
 
