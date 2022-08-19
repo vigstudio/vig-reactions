@@ -32,9 +32,10 @@ class HookServiceProvider extends ServiceProvider
                         'attributes' => [
                             'name'    => 'vig_reactions_style',
                             'list'    => [
-                                '1' => 'Style 1',
-                                '2' => 'Style 2',
-                                '3' => 'Style 3',
+                                '1' => 'Full Option',
+                                '2' => 'Simple More',
+                                '3' => 'Simple More Small',
+                                '4' => 'Same Github',
                             ],
                             'value'   => '',
                             'options' => [
