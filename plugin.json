@@ -4,6 +4,6 @@
     "provider": "Botble\\VigReactions\\Providers\\VigReactionsServiceProvider",
     "author": "Phạm Viết Nghĩa",
     "url": "https://nghiane.com",
-    "version": "1.2.0",
+    "version": "1.2.4",
     "description": "Facebook Reaction for Botble"
 }
