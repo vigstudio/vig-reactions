@@ -34,7 +34,9 @@ class ActionController extends BaseController
         $data = $request->input('reaction_type')::find($request->input('reaction_id'));
 
         $react = $data->reactions?->first();
-
+        if (!$react) {
+            return $response->setError(true)->setMessage(__('Reaction not found'));
+        }
         return $response->setData(new ReactionResource($react))->toApiResponse();
     }
 

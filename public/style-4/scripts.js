@@ -30,18 +30,20 @@ function callReaction(type, route){
             type: type,
         },
         success: function(data){
-            $('#add-reaction-span').html('');
-            $.each( data.data.reactable_summary, function( key, value ) {
-                var html =  `
-                <button class="c-button-unstyled c-reaction c-reaction--feature_new_reactions" type="button" delay="300">
-                    <span class="emoji emoji-sizer" data-codepoints="420" style="background-image: url(&quot;vendor/core/plugins/vig-reactions/icon/`+key+`-a.gif&quot;);">:420:</span>
-                    <span class="c-reaction__count">`+value+`</span>
-                </button>
-                `;
+            if(!data.error){
+                $('#add-reaction-span').html('');
+                $.each( data.data.reactable_summary, function( key, value ) {
+                    var html =  `
+                    <button class="c-button-unstyled c-reaction c-reaction--feature_new_reactions" type="button" delay="300">
+                        <span class="emoji emoji-sizer" data-codepoints="420" style="background-image: url(&quot;vendor/core/plugins/vig-reactions/icon/`+key+`-a.gif&quot;);">:420:</span>
+                        <span class="c-reaction__count">`+value+`</span>
+                    </button>
+                    `;
 
 
-                $('#add-reaction-span').append(html);
-            });
+                    $('#add-reaction-span').append(html);
+                });
+            }
         }
     })
 }

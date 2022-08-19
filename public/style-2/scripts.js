@@ -15,19 +15,19 @@ $(document).ready(function(){
             type: type,
         },
         success: function(data){
-            $.each(array_reation, function(index, value){
-                $('#vig-reaction-'+value).attr('data-count',0);
-                $('#vig-reaction-'+value).text(0);
-            });
+            if(!data.error){
+                $.each(array_reation, function(index, value){
+                    $('#vig-reaction-'+value).attr('data-count',0);
+                    $('#vig-reaction-'+value).text(0);
+                });
 
-            $.each( data.data.reactable_summary, function( key, value ) {
-                $('#vig-reaction-'+key).attr('data-count', value);
-                $('#vig-reaction-'+key).html(value);
-            });
+                $.each( data.data.reactable_summary, function( key, value ) {
+                    $('#vig-reaction-'+key).attr('data-count', value);
+                    $('#vig-reaction-'+key).html(value);
+                });
 
-            $('#vig-reaction').attr('data-total', data.data.reactable_total);
-
-            resetPercent();
+                $('#vig-reaction').attr('data-total', data.data.reactable_total);
+            }
         }
     })
 })
@@ -60,8 +60,6 @@ $('#vig-reaction').on('click', '.vigreaction', function(){
             });
 
             $('#vig-reaction').attr('data-total', data.data.reactable_total);
-
-            resetPercent();
         }
     })
 })
