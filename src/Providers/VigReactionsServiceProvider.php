@@ -2,6 +2,7 @@
 
 namespace Botble\VigReactions\Providers;
 
+use Botble\Base\Models\BaseModel;
 use Botble\VigReactions\Models\VigReactions;
 use Illuminate\Support\ServiceProvider;
 use Botble\VigReactions\Repositories\Caches\VigReactionsCacheDecorator;
@@ -43,7 +44,7 @@ class VigReactionsServiceProvider extends ServiceProvider
             if (!class_exists($item)) {
                 continue;
             }
-             /**
+            /**
              * @var BaseModel $item
              */
             $item::resolveRelationUsing('reactions', function ($model) {

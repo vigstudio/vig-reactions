@@ -1,63 +1,63 @@
 @keyframes reaction {
     0% {
-      width: 38px;
-      height: 38px;
-      top: 60px;
+        width: 38px;
+        height: 38px;
+        top: 60px;
     }
     35% {
-      width: 48px;
-      height: 48px;
-      top: 5px;
+        width: 48px;
+        height: 48px;
+        top: 5px;
     }
     100% {
-      width: 38px;
-      height: 38px;
-      top: 8px;
+        width: 38px;
+        height: 38px;
+        top: 8px;
     }
-  }
+}
 
-  .box-reaction {
+.box-reaction {
     height: 100px;
-    background-color:#ecf0f1;
+    background-color: #ecf0f1;
     border-radius: 5px;
-  }
+}
 
-  .dw-reactions {
+.dw-reactions {
     font-family: Arial, sans-serif;
     margin: 10px 0;
-    border:solid #eee;
+    border: solid #eee;
     border-width: 1px 0;
     padding: 5px 0;
-  }
+}
 
-  .dw-reactions:before,
-  .dw-reactions:after {
+.dw-reactions:before,
+.dw-reactions:after {
     content: " ";
     display: table;
-  }
+}
 
-  .dw-reactions:after {
+.dw-reactions:after {
     clear: both;
-  }
+}
 
-  .dw-reactions {
+.dw-reactions {
     *zoom: 1;
-  }
+}
 
-  .dw-reactions-button {
+.dw-reactions-button {
     position: relative;
     cursor: pointer;
     float: left;
-  }
+}
 
-  .dw-reactions-main-button {
+.dw-reactions-main-button {
     font-weight: bold;
     font-size: 14px;
     display: block;
     line-height: 30px;
-  }
+}
 
-  .dw-reactions-main-button:before {
+.dw-reactions-main-button:before {
     content: "";
     display: block;
     width: 20px;
@@ -68,74 +68,74 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_like {
+.dw-reactions-main-button.dw_reaction_like {
     color: rgb(88, 144, 255);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_love {
+.dw-reactions-main-button.dw_reaction_love {
     color: rgb(242, 82, 104);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_haha {
+.dw-reactions-main-button.dw_reaction_haha {
     color: rgb(240, 186, 21);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_wow {
+.dw-reactions-main-button.dw_reaction_wow {
     color: rgb(240, 186, 21);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_sad {
+.dw-reactions-main-button.dw_reaction_sad {
     color: rgb(240, 186, 21);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_angry {
+.dw-reactions-main-button.dw_reaction_angry {
     color: rgb(247, 113, 75);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_love:before {
+.dw-reactions-main-button.dw_reaction_love:before {
     background-image: url(../img/love.png);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_haha:before {
+.dw-reactions-main-button.dw_reaction_haha:before {
     background-image: url(../img/haha.png);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_wow:before {
+.dw-reactions-main-button.dw_reaction_wow:before {
     background-image: url(../img/wow.png);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_sad:before {
+.dw-reactions-main-button.dw_reaction_sad:before {
     background-image: url(../img/sad.png);
-  }
+}
 
-  .dw-reactions-main-button.dw_reaction_angry:before {
+.dw-reactions-main-button.dw_reaction_angry:before {
     background-image: url(../img/angry.png);
-  }
+}
 
-  .dw-reactions-box {
+.dw-reactions-box {
     position: absolute;
     top: -60px;
     left: 0;
     background: #fff;
     padding: 10px;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 40px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     box-sizing: border-box;
     width: 314px;
     height: 60px;
     display: none;
     z-index: -1;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reactions-box {
+.dw-reactions-button.reaction-show .dw-reactions-box {
     display: block;
     z-index: 1;
-  }
+}
 
-  .dw-reactions-box .dw-reaction {
+.dw-reactions-box .dw-reaction {
     display: block;
     position: absolute;
     width: 38px;
@@ -148,83 +148,83 @@
     opacity: 0;
     transform: scale(1, 1);
     transition: opacity .5s ease-in-out 1s, transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction {
+.dw-reactions-button.reaction-show .dw-reaction {
     opacity: 1;
     animation-name: reaction;
     animation-duration: .5s;
-  }
+}
 
-  .dw-reactions-box .dw-reaction-like {
+.dw-reactions-box .dw-reaction-like {
     left: 12px;
     transition-delay: 0s;
     background-image: url(../img/like.png);
-  }
+}
 
-  .dw-reactions-box .dw-reaction-love {
+.dw-reactions-box .dw-reaction-love {
     left: 62px;
     transition-delay: .05s;
     background-image: url(../img/love.png);
-  }
+}
 
-  .dw-reactions-box .dw-reaction-haha {
+.dw-reactions-box .dw-reaction-haha {
     left: 112px;
     transition-delay: .1s;
     background-image: url(../img/haha.png);
-  }
+}
 
-  .dw-reactions-box .dw-reaction-wow {
+.dw-reactions-box .dw-reaction-wow {
     left: 162px;
     transition-delay: .15s;
     background-image: url(../img/wow.png);
-  }
+}
 
-  .dw-reactions-box .dw-reaction-sad {
+.dw-reactions-box .dw-reaction-sad {
     left: 212px;
     transition-delay: .2s;
     background-image: url(../img/sad.png);
-  }
+}
 
-  .dw-reactions-box .dw-reaction-angry {
+.dw-reactions-box .dw-reaction-angry {
     left: 262px;
     transition-delay: .25s;
     background-image: url(../img/angry.png);
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction {
+.dw-reactions-button.reaction-show .dw-reaction {
     animation-delay: 0s;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction-love {
+.dw-reactions-button.reaction-show .dw-reaction-love {
     animation-delay: .05s;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction-haha {
+.dw-reactions-button.reaction-show .dw-reaction-haha {
     animation-delay: .1s;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction-wow {
+.dw-reactions-button.reaction-show .dw-reaction-wow {
     animation-delay: .15s;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction-sad {
+.dw-reactions-button.reaction-show .dw-reaction-sad {
     animation-delay: .2s;
-  }
+}
 
-  .dw-reactions-button.reaction-show .dw-reaction-angry {
+.dw-reactions-button.reaction-show .dw-reaction-angry {
     animation-delay: .25s;
-  }
+}
 
-  .dw-reaction:hover {
+.dw-reaction:hover {
     transform: scale(1.5, 1.5);
     top: 2px;
-  }
+}
 
-  .dw-reaction strong {
+.dw-reaction strong {
     position: absolute;
     top: -19px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     color: #fff;
     font-size: 8px;
     text-align: center;
@@ -235,28 +235,28 @@
     opacity: 0;
     transition: opacity .2s ease-in-out 0s;
     box-sizing: border-box;
-  }
+}
 
-  .dw-reaction:hover strong {
+.dw-reaction:hover strong {
     opacity: 1;
-  }
+}
 
-  .dw-reactions-count {
+.dw-reactions-count {
     line-height: 30px;
     font-size: 12px;
     float: right;
-  }
+}
 
-  .dw-reaction-count {
+.dw-reaction-count {
     display: inline-block;
     margin-left: 5px;
-  }
+}
 
-  .dw-reaction-count strong {
+.dw-reaction-count strong {
     font-weight: normal;
-  }
+}
 
-  .dw-reaction-count:before {
+.dw-reaction-count:before {
     content: "";
     float: left;
     width: 20px;
@@ -267,102 +267,104 @@
     background-position: center center;
     background-repeat: no-repeat;
     display: block;
-  }
+}
 
-  .dw-reaction-count-love:before {
+.dw-reaction-count-love:before {
     background-image: url(../img/love.png);
-  }
+}
 
-  .dw-reaction-count-haha:before {
+.dw-reaction-count-haha:before {
     background-image: url(../img/haha.png);
-  }
+}
 
-  .dw-reaction-count-wow:before {
+.dw-reaction-count-wow:before {
     background-image: url(../img/wow.png);
-  }
+}
 
-  .dw-reaction-count-sad:before {
+.dw-reaction-count-sad:before {
     background-image: url(../img/sad.png);
-  }
+}
 
-  .dw-reaction-count-angry:before {
+.dw-reaction-count-angry:before {
     background-image: url(../img/angry.png);
-  }
+}
 
 
-  .dw-reactions-2{
-      text-align: center;
-  }
+.dw-reactions-2 {
+    text-align: center;
+}
 
-  .dw-reactions-2 .dw-reactions-box-2{
-      display: inline-block;
-      margin: 0 5px;
-  }
+.dw-reactions-2 .dw-reactions-box-2 {
+    display: inline-block;
+    margin: 0 5px;
+}
 
-  .dw-reactions-2 .dw-reactions-percent{
-         background: #8cda9d;
-  }
+.dw-reactions-2 .dw-reactions-percent {
+    background: #8cda9d;
+}
 
-  .dw-reactions-2 .dw-reactions-icon{
-      padding: 10px;
-      background: #f1f1f1;
-      cursor: pointer;
-  }
-  .dw-reactions-2 .dw-reactions-icon img{
-      transition: opacity .5s ease-in-out 1s, transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
-  }
+.dw-reactions-2 .dw-reactions-icon {
+    padding: 10px;
+    background: #f1f1f1;
+    cursor: pointer;
+}
 
-  .dw-reactions-2 .dw-reactions-icon:hover{
-      background: #ddd;
-  }
+.dw-reactions-2 .dw-reactions-icon img {
+    transition: opacity .5s ease-in-out 1s, transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
+}
 
-  .dw-reactions-2 .dw-reactions-icon:hover img{
-      transform: scale(1.2, 1.2);
-  }
+.dw-reactions-2 .dw-reactions-icon:hover {
+    background: #ddd;
+}
 
-  /*style 2*/
-  .dw-reactions-3{
-      text-align: center;
-  }
+.dw-reactions-2 .dw-reactions-icon:hover img {
+    transform: scale(1.2, 1.2);
+}
 
-  .dw-reactions-3 .dw-reactions-box-3{
-      display: inline-block;
-      padding-left: 5px;
-  }
-  .dw-reactions-3 .dw-reactions-box-3:first-child{
-      padding-left: 0;
-  }
+/*style 2*/
+.dw-reactions-3 {
+    text-align: center;
+}
 
-  .dw-reactions-3 .dw-reactions-percent{
-      background: #e74c3c;
-      border-radius: 5px;
-  }
+.dw-reactions-3 .dw-reactions-box-3 {
+    display: inline-block;
+    padding-left: 5px;
+}
 
-  .dw-reactions-3 .dw-reactions-icon{
-      padding: 5px 15px;
-      cursor: pointer;
-      margin-top: 5px;
-      line-height: 1;
-  }
+.dw-reactions-3 .dw-reactions-box-3:first-child {
+    padding-left: 0;
+}
 
-  .dw-reactions-3 .dw-reactions-icon img{
-      transition: opacity .5s ease-in-out 1s,
-      transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
-  }
+.dw-reactions-3 .dw-reactions-percent {
+    background: #e74c3c;
+    border-radius: 5px;
+}
 
-  .dw-reactions-3 .dw-reactions-icon:hover{
+.dw-reactions-3 .dw-reactions-icon {
+    padding: 5px 15px;
+    cursor: pointer;
+    margin-top: 5px;
+    line-height: 1;
+}
 
-  }
+.dw-reactions-3 .dw-reactions-icon img {
+    transition: opacity .5s ease-in-out 1s,
+    transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
+}
 
-  .dw-reactions-count-3 {
+.dw-reactions-3 .dw-reactions-icon:hover {
+
+}
+
+.dw-reactions-count-3 {
     display: block;
     background-color: #e74c3c;
     border-radius: 5px;
     position: relative;
     bottom: 20px;
     color: #eee;
-  }
+}
 
-  .dw-reactions-3 .dw-reactions-icon:hover img{
-      transform: scale(1.5, 1.5);
-  }
+.dw-reactions-3 .dw-reactions-icon:hover img {
+    transform: scale(1.5, 1.5);
+}

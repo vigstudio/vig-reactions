@@ -16,9 +16,9 @@ class ReactionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'                  => $this->type,
-            'reactable_summary'     => $this->reactable->reactionSummary(),
-            'reactable_total'       => $this->reactable->reactionTotal(),
+            'type'              => $this->type,
+            'reactable_summary' => $this->reactable->reactionSummary(),
+            'reactable_total'   => $this->reactable->reactionTotal(),
         ];
     }
 }

@@ -3,10 +3,9 @@
 namespace Botble\VigReactions\Models;
 
 use Botble\Base\Traits\EnumCastable;
-use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Revision\RevisionableTrait;
 use Botble\Base\Models\BaseModel;
-use \Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class VigReactions extends BaseModel
 {
@@ -29,13 +28,13 @@ class VigReactions extends BaseModel
         'reactable_id',
         'reactable_type',
         'responder_id',
-        'responder_type'
+        'responder_type',
     ];
 
     /**
      * Reactable model relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     public function reactable(): MorphTo
     {
@@ -45,11 +44,10 @@ class VigReactions extends BaseModel
     /**
      * Get the user that reacted on reactable model.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     public function responder(): MorphTo
     {
         return $this->morphTo();
     }
-
 }
