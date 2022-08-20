@@ -4,7 +4,7 @@ $(document).on("click", "#emoji-picker-button", function (e) {
 
 $(document).on("click", ".intercom-emoji-picker-emoji", function () {
     callReaction($(this).attr('title'), 'press');
-    $(".intercom-composer-emoji-popover").removeClass("active");
+    $(".intercom-emoji-picker-group").removeClass("active");
 });
 
 function callReaction(type, route) {
