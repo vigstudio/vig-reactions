@@ -50,7 +50,7 @@ class HookServiceProvider extends ServiceProvider
     public function render($query)
     {
         $content = $query->content;
-        $style = theme_option('vig_reactions_style') ?? 1;
+        $style = theme_option('vig_reactions_style') ? theme_option('vig_reactions_style') : 1;
         return view('plugins/vig-reactions::style-'.$style, compact('content'));
     }
 
