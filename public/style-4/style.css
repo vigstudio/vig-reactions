@@ -63,7 +63,6 @@ p {
 }
 
 
-
 /* ---------------------------------------
   ------------- Existing styles ------------
   ------------------------------------------ */
@@ -233,7 +232,7 @@ span.emoji:not(:empty) {
 .intercom-emoji-picker-group {
     position: fixed;
     margin: 10px -5px;
-    box-shadow: 0 1px 15px 1px rgba(0,0,0,.08);
+    box-shadow: 0 1px 15px 1px rgba(0, 0, 0, .08);
     background-color: #fff;
     border-radius: 6px;
     transition-duration: 200ms;
@@ -271,6 +270,20 @@ span.emoji:not(:empty) {
     transform: scale(1.4);
 }
 
+.c-reaction_bar {
+    position: relative;
+}
+
+.intercom-emoji-picker-group {
+    position: absolute;
+    top: -30px;
+    left: 6px;
+}
+
+.intercom-emoji-picker-group.active {
+    display: block;
+}
+
 
 /* ---------------------------------------
   ----------------- Archives ---------------
@@ -292,3 +305,5 @@ span.emoji:not(:empty) {
     top:12px;
     left:14px;
   }
+
+ */

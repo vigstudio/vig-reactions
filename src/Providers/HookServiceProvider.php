@@ -2,10 +2,7 @@
 
 namespace Botble\VigReactions\Providers;
 
-use Botble\Base\Enums\BaseStatusEnum;
 use Illuminate\Support\ServiceProvider;
-use Botble\VigReactions\Models\VigReactions;
-use Theme;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -50,8 +47,14 @@ class HookServiceProvider extends ServiceProvider
     public function render($query)
     {
         $content = $query->content;
-        $style = theme_option('vig_reactions_style') ? theme_option('vig_reactions_style') : 1;
-        return view('plugins/vig-reactions::style-'.$style, compact('content'));
+
+        $style = theme_option('vig_reactions_style') ?: 1;
+
+        $reactionTypes = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
+
+        $data = json_decode($content);
+
+        return view('plugins/vig-reactions::style-' . $style, compact('content', 'reactionTypes', 'data'));
     }
 
 }

@@ -1,27 +1,18 @@
-var array_reation = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
+$(document).on("click", "#emoji-picker-button", function (e) {
+    $('.intercom-emoji-picker-group').toggleClass('active');
+});
 
-$(document).on("click", "#emoji-picker",function(e){
-     $('.intercom-emoji-picker-group').toggleClass("active");
-    //  var rect = document.querySelector('#emoji-picker').getBoundingClientRect();
-    // console.log(rect.top, rect.right, rect.bottom, rect.left);
-    // console.log(e.pageX, e.pageY);
-    $('.intercom-emoji-picker-group').css({
-        right: 'calc(95% - '+e.pageX+'px)',
-        bottom: 'calc(100% - '+(e.pageY - 100)+'px)',
-    });
- });
-
-$(document).on("click",".intercom-emoji-picker-emoji",function(e){
+$(document).on("click", ".intercom-emoji-picker-emoji", function () {
     callReaction($(this).attr('title'), 'press');
     $(".intercom-composer-emoji-popover").removeClass("active");
 });
 
-function callReaction(type, route){
-    var reaction_id = $('#vig-reaction').data('id');
-    var reaction_type = $('#vig-reaction').data('type');
+function callReaction(type, route) {
+    let reaction_id = $('#vig-reaction').data('id');
+    let reaction_type = $('#vig-reaction').data('type');
 
     $.ajax({
-        url: "reaction/"+route+"-reaction",
+        url: 'reaction/' + route + '-reaction',
         method: 'POST',
         data: {
             _token: $("meta[name='csrf-token']").attr("content"),
@@ -29,14 +20,14 @@ function callReaction(type, route){
             reaction_type: reaction_type,
             type: type,
         },
-        success: function(data){
-            if(!data.error){
+        success: function (data) {
+            if (!data.error) {
                 $('#add-reaction-span').html('');
-                $.each( data.data.reactable_summary, function( key, value ) {
-                    var html =  `
+                $.each(data.data.reactable_summary, function (key, value) {
+                    let html = `
                     <button class="c-button-unstyled c-reaction c-reaction--feature_new_reactions" type="button" delay="300">
-                        <span class="emoji emoji-sizer" data-codepoints="420" style="background-image: url(&quot;vendor/core/plugins/vig-reactions/icon/`+key+`-a.gif&quot;);">:420:</span>
-                        <span class="c-reaction__count">`+value+`</span>
+                        <span class="emoji emoji-sizer" data-codepoints="420" style="background-image: url(&quot;vendor/core/plugins/vig-reactions/icon/` + key + `-a.gif&quot;);">:420:</span>
+                        <span class="c-reaction__count">` + value + `</span>
                     </button>
                     `;
 
@@ -47,7 +38,8 @@ function callReaction(type, route){
         }
     })
 }
-$(document).ready(function(){
+
+$(document).ready(function () {
     callReaction('like', 'get');
 })
 

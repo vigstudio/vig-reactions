@@ -6,6 +6,8 @@ use Botble\Base\Events\BeforeEditContentEvent;
 use Botble\VigReactions\Http\Requests\VigReactionsRequest;
 use Botble\VigReactions\Repositories\Interfaces\VigReactionsInterface;
 use Botble\Base\Http\Controllers\BaseController;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
 use Botble\VigReactions\Tables\VigReactionsTable;
@@ -15,6 +17,7 @@ use Botble\Base\Events\UpdatedContentEvent;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\VigReactions\Forms\VigReactionsForm;
 use Botble\Base\Forms\FormBuilder;
+use Throwable;
 
 class VigReactionsController extends BaseController
 {
@@ -33,8 +36,8 @@ class VigReactionsController extends BaseController
 
     /**
      * @param VigReactionsTable $table
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Throwable
+     * @return JsonResponse|View
+     * @throws Throwable
      */
     public function index(VigReactionsTable $table)
     {

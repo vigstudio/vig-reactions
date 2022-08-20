@@ -3,12 +3,10 @@
 namespace Botble\VigReactions\Tables;
 
 use Auth;
-use Botble\Base\Enums\BaseStatusEnum;
 use Botble\VigReactions\Repositories\Interfaces\VigReactionsInterface;
 use Botble\Table\Abstracts\TableAbstract;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Yajra\DataTables\DataTables;
-use Botble\VigReactions\Models\VigReactions;
 use Html;
 
 class VigReactionsTable extends TableAbstract
@@ -94,12 +92,12 @@ class VigReactionsTable extends TableAbstract
     public function columns()
     {
         return [
-            'id' => [
+            'id'         => [
                 'name'  => 'vig_reactions.id',
                 'title' => trans('core/base::tables.id'),
                 'width' => '20px',
             ],
-            'name' => [
+            'name'       => [
                 'name'  => 'vig_reactions.name',
                 'title' => trans('core/base::tables.type'),
                 'class' => 'text-left',
@@ -117,9 +115,7 @@ class VigReactionsTable extends TableAbstract
      */
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('vig-reactions.create'), 'vig-reactions.create');
-
-        return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, VigReactions::class);
+        return $this->addCreateButton(route('vig-reactions.create'), 'vig-reactions.create');
     }
 
     /**
@@ -136,7 +132,7 @@ class VigReactionsTable extends TableAbstract
     public function getBulkChanges(): array
     {
         return [
-            'vig_reactions.type' => [
+            'vig_reactions.type'       => [
                 'title'    => trans('core/base::tables.type'),
                 'type'     => 'text',
                 'validate' => 'required|max:120',

@@ -3,7 +3,6 @@
 namespace Botble\VigReactions\Forms;
 
 use Botble\Base\Forms\FormAbstract;
-use Botble\Base\Enums\BaseStatusEnum;
 use Botble\VigReactions\Http\Requests\VigReactionsRequest;
 use Botble\VigReactions\Models\VigReactions;
 

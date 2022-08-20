@@ -1,23 +1,18 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-@php
-    $data = json_decode($content);
-    $array_reation = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
-@endphp
-
-    <div class='reactions' id="vig-reaction"
-                            data-total="0"
-                            data-id="{{ $data->reference_id }}"
-                            data-type="{{ $data->reference_type }}">
-        @foreach($array_reation as $reaction)
-            <a class='reaction large vigreaction' href='javascript:;' data-type="{{ $reaction }}">
-                <span class='inner'>
-                    <span class='emoji'><img src="vendor/core/plugins/vig-reactions/icon/{{ $reaction }}-a.gif" alt="{{ $reaction }}" height="50px"></span>
-                    <span class='count' id="vig-reaction-{{ $reaction }}" data-count="0">0</span>
-                </span>
-            </a>
-        @endforeach
-    </div>
+<div class='reactions' id="vig-reaction"
+                    data-total="0"
+                    data-id="{{ $data->reference_id }}"
+                    data-type="{{ $data->reference_type }}">
+    @foreach($reactionTypes as $reaction)
+        <a class='reaction large vigreaction' href='javascript:;' data-type="{{ $reaction }}">
+            <span class='inner'>
+                <span class='emoji'><img src="vendor/core/plugins/vig-reactions/icon/{{ $reaction }}-a.gif" alt="{{ $reaction }}" height="50px"></span>
+                <span class='count' id="vig-reaction-{{ $reaction }}" data-count="0">0</span>
+            </span>
+        </a>
+    @endforeach
+</div>
 
 @php
     Theme::asset()
