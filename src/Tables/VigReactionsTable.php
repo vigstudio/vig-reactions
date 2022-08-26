@@ -3,6 +3,7 @@
 namespace Botble\VigReactions\Tables;
 
 use Auth;
+use BaseHelper;
 use Botble\VigReactions\Repositories\Interfaces\VigReactionsInterface;
 use Botble\Table\Abstracts\TableAbstract;
 use Illuminate\Contracts\Routing\UrlGenerator;
@@ -46,29 +47,25 @@ class VigReactionsTable extends TableAbstract
     public function ajax()
     {
         $data = $this->table
-            ->eloquent($this->query())
-            ->editColumn('name', function ($item) {
-                if (!Auth::user()->hasPermission('vig-reactions.edit')) {
-                    return $item->name;
-                }
-                return Html::link(route('vig-reactions.edit', $item->id), $item->name);
+            ->of($this->query())
+            ->editColumn('type', function ($item) {
+                return $item->type_image;
             })
             ->editColumn('checkbox', function ($item) {
-                return table_checkbox($item->id);
+                return $this->getCheckbox($item->id);
             })
             ->editColumn('created_at', function ($item) {
-                return date_from_database($item->created_at, config('core.base.general.date_format.date'));
+                return BaseHelper::formatDate($item->created_at);
             })
-            ->editColumn('status', function ($item) {
-                return $item->status->toHtml();
+            ->editColumn('reactable_id', function ($item) {
+                return Html::link($item->reactable->slugable->key, BaseHelper::clean($item->reactable->name), ['target' => '_blank']);
+            })
+            ->addColumn('operations', function ($item) {
+                return view('plugins/vig-reactions::actions', compact('item'))->render();
+
             });
 
-        return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
-            ->addColumn('operations', function ($item) {
-                return table_actions('vig-reactions.edit', 'vig-reactions.destroy', $item);
-            })
-            ->escapeColumns([])
-            ->make(true);
+        return $this->toJson($data);
     }
 
     /**
@@ -77,13 +74,17 @@ class VigReactionsTable extends TableAbstract
     public function query()
     {
         $model = $this->repository->getModel();
-        $query = $model->select([
-            'vig_reactions.id',
-            'vig_reactions.type',
-            'vig_reactions.created_at',
-        ]);
+        $query = $model
+            ->with(['reactable'])
+            ->select([
+                'vig_reactions.id',
+                'vig_reactions.type',
+                'vig_reactions.reactable_id',
+                'vig_reactions.reactable_type',
+                'vig_reactions.created_at',
+            ]);
 
-        return $this->applyScopes(apply_filters(BASE_FILTER_TABLE_QUERY, $query, $model));
+        return $this->applyScopes($query);
     }
 
     /**
@@ -97,9 +98,13 @@ class VigReactionsTable extends TableAbstract
                 'title' => trans('core/base::tables.id'),
                 'width' => '20px',
             ],
-            'name'       => [
-                'name'  => 'vig_reactions.name',
-                'title' => trans('core/base::tables.type'),
+            'type'       => [
+                'name'  => 'vig_reactions.type',
+                'title' => 'Type',
+                'class' => 'text-left',
+            ],
+            'reactable_id'       => [
+                'title' => 'name',
                 'class' => 'text-left',
             ],
             'created_at' => [
@@ -115,7 +120,7 @@ class VigReactionsTable extends TableAbstract
      */
     public function buttons()
     {
-        return $this->addCreateButton(route('vig-reactions.create'), 'vig-reactions.create');
+        // return $this->addCreateButton(route('vig-reactions.create'), 'vig-reactions.create');
     }
 
     /**
@@ -123,7 +128,11 @@ class VigReactionsTable extends TableAbstract
      */
     public function bulkActions(): array
     {
-        return $this->addDeleteAction(route('vig-reactions.deletes'), 'vig-reactions.destroy', parent::bulkActions());
+        return $this->addDeleteAction(
+            route('vig-reactions.deletes'),
+            'vig-reactions.destroy',
+            parent::bulkActions()
+        );
     }
 
     /**
@@ -133,9 +142,17 @@ class VigReactionsTable extends TableAbstract
     {
         return [
             'vig_reactions.type'       => [
-                'title'    => trans('core/base::tables.type'),
-                'type'     => 'text',
+                'title'    => 'Type',
+                'type'     => 'customSelect',
                 'validate' => 'required|max:120',
+                'choices'    => [
+                    'like'  => ' Like',
+                    'love'  =>  'Love',
+                    'haha'  =>  'Haha',
+                    'wow'   =>  'WoW',
+                    'sad'   =>  'Sad',
+                    'angry' =>  'Angry',
+                ],
             ],
             'vig_reactions.created_at' => [
                 'title' => trans('core/base::tables.created_at'),

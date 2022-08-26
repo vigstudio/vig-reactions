@@ -11,6 +11,11 @@ Route::group(['namespace' => 'Botble\VigReactions\Http\Controllers', 'middleware
                 'uses'       => 'VigReactionsController@deletes',
                 'permission' => 'vig-reactions.destroy',
             ]);
+            Route::post('items/copy/{id}', [
+                'as'         => 'copy',
+                'uses'       => 'VigReactionsController@copy',
+                'permission' => 'vig-reactions.copy',
+            ]);
         });
     });
 

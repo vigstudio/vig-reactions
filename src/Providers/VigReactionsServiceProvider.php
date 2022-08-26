@@ -67,20 +67,14 @@ class VigReactionsServiceProvider extends ServiceProvider
         }
 
 
-        Event::listen(RouteMatched::class, function () {
-            if (defined('LANGUAGE_MODULE_SCREEN_NAME')) {
-                \Language::registerModule([VigReactions::class]);
-            }
-
-            // dashboard_menu()->registerItem([
-            //     'id'          => 'cms-plugins-vig-reactions',
-            //     'priority'    => 5,
-            //     'parent_id'   => null,
-            //     'name'        => 'plugins/vig-reactions::vig-reactions.name',
-            //     'icon'        => 'fa fa-list',
-            //     'url'         => route('vig-reactions.index'),
-            //     'permissions' => ['vig-reactions.index'],
-            // ]);
-        });
+        dashboard_menu()->registerItem([
+            'id'          => 'cms-plugins-vig-reactions',
+            'priority'    => 5,
+            'parent_id'   => null,
+            'name'        => 'Reaction Manager',
+            'icon'        => 'fa fa-list',
+            'url'         => route('vig-reactions.index'),
+            'permissions' => ['vig-reactions.index'],
+        ]);
     }
 }

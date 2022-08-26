@@ -31,6 +31,13 @@ class VigReactions extends BaseModel
         'responder_type',
     ];
 
+   protected $append = ['type_image'];
+
+    public function getTypeImageAttribute()
+    {
+        return "<img src='".asset('vendor/core/plugins/vig-reactions/icon/'.$this->type.'-a.gif')."' height='40px'>";
+    }
+
     /**
      * Reactable model relation.
      *

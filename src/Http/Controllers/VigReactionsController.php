@@ -74,6 +74,26 @@ class VigReactionsController extends BaseController
             ->setMessage(trans('core/base::notices.create_success_message'));
     }
 
+     /**
+     * @param Request $request
+     * @param $id
+     * @return BaseHttpResponse
+     */
+    public function copy(Request $request, $id, BaseHttpResponse $response)
+    {
+        $vigReactions = $this->vigReactionsRepository->findOrFail($id);
+
+        $new = $vigReactions->replicate();
+        $new->save();
+
+        event(new CreatedContentEvent(VIG_REACTIONS_MODULE_SCREEN_NAME, $request, $new));
+
+        return $response
+            ->setPreviousUrl(route('vig-reactions.index'))
+            ->setNextUrl(route('vig-reactions.index'))
+            ->setMessage(trans('core/base::notices.create_success_message'));
+    }
+
     /**
      * @param $id
      * @param Request $request

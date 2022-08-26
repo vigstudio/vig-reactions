@@ -20,4 +20,9 @@ return [
         'flag'        => 'vig-reactions.destroy',
         'parent_flag' => 'vig-reactions.index',
     ],
+    [
+        'name'        => 'Copy',
+        'flag'        => 'vig-reactions.copy',
+        'parent_flag' => 'vig-reactions.index',
+    ],
 ];

@@ -17,4 +17,3 @@ if (!function_exists('get_auth_reaction')) {
         return null;
     }
 }
-
