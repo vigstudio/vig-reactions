@@ -2,7 +2,10 @@
 
 namespace Botble\VigReactions\Providers;
 
+use Assets;
 use Illuminate\Support\ServiceProvider;
+use Botble\Dashboard\Supports\DashboardWidgetInstance;
+use Illuminate\Support\Facades\Auth;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -10,9 +13,12 @@ class HookServiceProvider extends ServiceProvider
     {
         if (function_exists('shortcode')) {
             add_shortcode('vig-reactions', __('Vig Reactions'), __('Add Vig Reaction'), function ($query) {
-                return $this->render($query);
+                return $this->renderReaction($query);
             });
         }
+
+        add_filter(DASHBOARD_FILTER_ADMIN_LIST, [$this, 'registerDashboardWidgetsRecent'], 51, 2);
+        add_filter(DASHBOARD_FILTER_ADMIN_LIST, [$this, 'registerDashboardWidgetsPopular'], 50, 2);
 
         theme_option()
             ->setSection([
@@ -44,7 +50,11 @@ class HookServiceProvider extends ServiceProvider
             ]);
     }
 
-    public function render($query)
+    /**
+     * @param stdClass $shortcode
+     * @return array|string
+     */
+    public function renderReaction($query)
     {
         $content = $query->content;
 
@@ -55,6 +65,56 @@ class HookServiceProvider extends ServiceProvider
         $data = json_decode($content);
 
         return view('plugins/vig-reactions::style-' . $style, compact('content', 'reactionTypes', 'data'));
+    }
+
+    /**
+     * @param array $widgets
+     * @param Collection $widgetSettings
+     * @return array
+     */
+    public function registerDashboardWidgetsRecent($widgets, $widgetSettings)
+    {
+        if (!Auth::user()->hasPermission('vig-reactions.index')) {
+            return $widgets;
+        }
+
+        Assets::addScriptsDirectly(['/vendor/core/plugins/vig-reactions/reaction-recent.js']);
+
+        return (new DashboardWidgetInstance())
+            ->setPermission('vig-reactions.index')
+            ->setKey('widget_reaction_vig_recent')
+            ->setTitle('Reactions Recent')
+            ->setIcon('fas fa-flushed')
+            ->setColor('#f3c200')
+            ->setRoute(route('vig-reactions.widget.recent-reactions'))
+            ->setBodyClass('scroll-table')
+            ->setColumn('col-md-6 col-sm-6')
+            ->init($widgets, $widgetSettings);
+    }
+
+    /**
+     * @param array $widgets
+     * @param Collection $widgetSettings
+     * @return array
+     */
+    public function registerDashboardWidgetsPopular($widgets, $widgetSettings)
+    {
+        if (!Auth::user()->hasPermission('vig-reactions.index')) {
+            return $widgets;
+        }
+
+        Assets::addScriptsDirectly(['/vendor/core/plugins/vig-reactions/reaction-recent.js']);
+
+        return (new DashboardWidgetInstance())
+            ->setPermission('vig-reactions.index')
+            ->setKey('widget_reaction_vig_popular')
+            ->setTitle('Popularity Reaction')
+            ->setIcon('fas fa-flushed')
+            ->setColor('#f3c200')
+            ->setRoute(route('vig-reactions.widget.popular-reactions'))
+            ->setBodyClass('scroll-table')
+            ->setColumn('col-md-6 col-sm-6')
+            ->init($widgets, $widgetSettings);
     }
 
 }

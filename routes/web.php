@@ -16,6 +16,18 @@ Route::group(['namespace' => 'Botble\VigReactions\Http\Controllers', 'middleware
                 'uses'       => 'VigReactionsController@copy',
                 'permission' => 'vig-reactions.copy',
             ]);
+
+            Route::get('widgets/recent-vig-reactions', [
+                'as'         => 'widget.recent-reactions',
+                'uses'       => 'VigReactionsController@getWidgetRecentReactions',
+                'permission' => 'vig-reactions.index',
+            ]);
+
+            Route::get('widgets/popular-vig-reactions', [
+                'as'         => 'widget.popular-reactions',
+                'uses'       => 'VigReactionsController@getWidgetPopularReactions',
+                'permission' => 'vig-reactions.index',
+            ]);
         });
     });
 

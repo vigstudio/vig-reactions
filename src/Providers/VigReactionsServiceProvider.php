@@ -4,10 +4,14 @@ namespace Botble\VigReactions\Providers;
 
 use Botble\Base\Models\BaseModel;
 use Botble\VigReactions\Models\VigReactions;
+use Botble\VigReactions\Models\VigReactionMeta;
 use Illuminate\Support\ServiceProvider;
 use Botble\VigReactions\Repositories\Caches\VigReactionsCacheDecorator;
 use Botble\VigReactions\Repositories\Eloquent\VigReactionsRepository;
 use Botble\VigReactions\Repositories\Interfaces\VigReactionsInterface;
+use Botble\VigReactions\Repositories\Caches\VigReactionMetaCacheDecorator;
+use Botble\VigReactions\Repositories\Eloquent\VigReactionMetaRepository;
+use Botble\VigReactions\Repositories\Interfaces\VigReactionMetaInterface;
 use Botble\Base\Supports\Helper;
 use Event;
 use Botble\Base\Traits\LoadAndPublishDataTrait;
@@ -25,6 +29,10 @@ class VigReactionsServiceProvider extends ServiceProvider
             return new VigReactionsCacheDecorator(new VigReactionsRepository(new VigReactions));
         });
 
+        $this->app->bind(VigReactionMetaInterface::class, function () {
+            return new VigReactionMetaCacheDecorator(new VigReactionMetaRepository(new VigReactionMeta));
+        });
+
         Helper::autoload(__DIR__ . '/../../helpers');
     }
 
@@ -39,6 +47,8 @@ class VigReactionsServiceProvider extends ServiceProvider
             ->publishAssets();
 
         $this->app->register(HookServiceProvider::class);
+
+        // config()->set('database.mysql.strict', false);
 
         foreach (array_keys($this->app->make(SlugHelper::class)->supportedModels()) as $item) {
             if (!class_exists($item)) {
@@ -63,6 +73,10 @@ class VigReactionsServiceProvider extends ServiceProvider
 
             MacroableModels::addMacro($item, 'getReactionSummaryAttribute', function () {
                 return $this->reactionSummary();
+            });
+
+            MacroableModels::addMacro($item, 'getSummaryAttribute', function () {
+                return $this->reactionTotal();
             });
         }
 

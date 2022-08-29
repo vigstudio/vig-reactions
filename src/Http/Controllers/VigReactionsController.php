@@ -5,6 +5,7 @@ namespace Botble\VigReactions\Http\Controllers;
 use Botble\Base\Events\BeforeEditContentEvent;
 use Botble\VigReactions\Http\Requests\VigReactionsRequest;
 use Botble\VigReactions\Repositories\Interfaces\VigReactionsInterface;
+use Botble\VigReactions\Repositories\Interfaces\VigReactionMetaInterface;
 use Botble\Base\Http\Controllers\BaseController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +19,7 @@ use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\VigReactions\Forms\VigReactionsForm;
 use Botble\Base\Forms\FormBuilder;
 use Throwable;
+use Botble\Slug\SlugHelper;
 
 class VigReactionsController extends BaseController
 {
@@ -26,12 +28,20 @@ class VigReactionsController extends BaseController
      */
     protected $vigReactionsRepository;
 
+     /**
+     * @var VigReactionMetaInterface
+     */
+    protected $metaBoxRepository;
+
     /**
      * @param VigReactionsInterface $vigReactionsRepository
+     * MetaBox constructor.
+     * @param VigReactionMetaInterface $metaBoxRepository
      */
-    public function __construct(VigReactionsInterface $vigReactionsRepository)
+    public function __construct(VigReactionsInterface $vigReactionsRepository, VigReactionMetaInterface $metaBoxRepository)
     {
         $this->vigReactionsRepository = $vigReactionsRepository;
+        $this->metaBoxRepository = $metaBoxRepository;
     }
 
     /**
@@ -177,5 +187,55 @@ class VigReactionsController extends BaseController
         }
 
         return $response->setMessage(trans('core/base::notices.delete_success_message'));
+    }
+
+
+     /**
+     * @param Request $request
+     * @param BaseHttpResponse $response
+     * @return BaseHttpResponse
+     * @throws Throwable
+     */
+    public function getWidgetRecentReactions(Request $request, BaseHttpResponse $response)
+    {
+        $limit = (int)$request->input('paginate', 10);
+        $limit = $limit > 0 ? $limit : 10;
+
+        $reactions = $this->vigReactionsRepository->advancedGetReaction([
+            'with'     => ['reactable'],
+            'order_by' => ['created_at' => 'desc'],
+            'paginate' => [
+                'per_page'      => $limit,
+                'current_paged' => (int)$request->input('page', 1),
+            ],
+        ]);
+
+        return $response
+            ->setData(view('plugins/vig-reactions::widgets.recent', compact('reactions', 'limit'))->render());
+    }
+
+    /**
+     * @param Request $request
+     * @param BaseHttpResponse $response
+     * @return BaseHttpResponse
+     * @throws Throwable
+     */
+    public function getWidgetPopularReactions(Request $request, BaseHttpResponse $response)
+    {
+        $limit = (int)$request->input('paginate', 10);
+        $limit = $limit > 0 ? $limit : 10;
+
+
+         $reactions = $this->metaBoxRepository->advancedGet([
+            'with'     => ['reactable'],
+            'order_by' => ['value->reactable_total' => 'asc'],
+            'paginate' => [
+                'per_page'      => $limit,
+                'current_paged' => (int)$request->input('page', 1),
+            ],
+        ]);
+
+        return $response
+            ->setData(view('plugins/vig-reactions::widgets.popular', compact('reactions', 'limit'))->render());
     }
 }

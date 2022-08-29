@@ -7,5 +7,8 @@ use Botble\VigReactions\Repositories\Interfaces\VigReactionsInterface;
 
 class VigReactionsCacheDecorator extends CacheAbstractDecorator implements VigReactionsInterface
 {
-
+    public function advancedGetReaction(array $params = [])
+    {
+        return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
+    }
 }
