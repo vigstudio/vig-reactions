@@ -2,6 +2,11 @@
 
 return [
     'name'   => 'Vig reactions',
-    'create' => 'New vig reactions',
-    'edit'   => 'Edit vig reactions',
+    'create' => 'New Vig reactions',
+    'edit'   => 'Edit Vig reactions',
+    'delete_entry'  => 'Delete Vig reactions',
+    'copy' => 'Copy Vig reactions',
+    'type'   => 'Type',
+    'name'  => 'Name',
+    'count' => 'Count',
 ];

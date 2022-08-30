@@ -47,6 +47,7 @@ class VigReactionsServiceProvider extends ServiceProvider
             ->publishAssets();
 
         $this->app->register(HookServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
 
         // config()->set('database.mysql.strict', false);
 

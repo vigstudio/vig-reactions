@@ -9,10 +9,10 @@ use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\VigReactions\Http\Requests\VigReactionsRequest;
 use Botble\VigReactions\Traits\Reacts;
 use Botble\VigReactions\Http\Resources\ReactionResource;
-use Botble\VigReactions\Http\Resources\ReactionMetaResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Botble\VigReactions\Http\Events\CreateOrUpdateReactionEvent;
 
 class ActionController extends BaseController
 {
@@ -84,7 +84,7 @@ class ActionController extends BaseController
 
         $react = $this->reactTo($data, $request->input('type'));
 
-        $this->metaBoxRepository->saveMetaReactionData($data, new ReactionResource($react));
+        event(new CreateOrUpdateReactionEvent($react));
 
         return $response->setData(new ReactionResource($react))->toApiResponse();
     }

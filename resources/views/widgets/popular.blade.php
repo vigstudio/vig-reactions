@@ -4,9 +4,9 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Type</th>
-                <th>Name</th>
-                <th>Count</th>
+                <th>{{ trans('plugins/vig-reactions::vig-reactions.type') }}</th>
+                <th>{{ trans('plugins/vig-reactions::vig-reactions.name') }}</th>
+                <th>{{ trans('plugins/vig-reactions::vig-reactions.count') }}</th>
                 <th>{{ trans('core/base::tables.created_at') }}</th>
             </tr>
             </thead>
