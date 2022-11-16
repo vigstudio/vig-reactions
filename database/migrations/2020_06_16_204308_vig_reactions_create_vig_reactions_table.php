@@ -12,6 +12,7 @@ class VigReactionsCreateVigReactionsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('vig_reactions');
         Schema::create('vig_reactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type', 10);

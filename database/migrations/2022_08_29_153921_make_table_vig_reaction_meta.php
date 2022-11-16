@@ -13,6 +13,7 @@ class MakeTableVigReactionMeta extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('vig_reaction_meta');
         Schema::create('vig_reaction_meta', function (Blueprint $table) {
             $table->id();
             $table->text('value')->nullable();
