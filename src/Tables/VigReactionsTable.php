@@ -9,6 +9,7 @@ use Botble\Table\Abstracts\TableAbstract;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Yajra\DataTables\DataTables;
 use Html;
+use Illuminate\Http\JsonResponse;
 
 class VigReactionsTable extends TableAbstract
 {
@@ -44,7 +45,7 @@ class VigReactionsTable extends TableAbstract
     /**
      * {@inheritDoc}
      */
-    public function ajax()
+    public function ajax(): JsonResponse
     {
         $data = $this->table
             ->of($this->query())
