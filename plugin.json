@@ -1,9 +1,10 @@
 {
+    "id": "vigstudio/vig-reactions",
     "name": "VigReactions",
     "namespace": "Botble\\VigReactions\\",
     "provider": "Botble\\VigReactions\\Providers\\VigReactionsServiceProvider",
     "author": "Phạm Viết Nghĩa",
     "url": "https://nghiane.com",
-    "version": "1.2.10",
+    "version": "1.2.11",
     "description": "Facebook Reaction for Botble"
 }
