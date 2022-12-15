@@ -14,22 +14,10 @@ use Illuminate\Http\JsonResponse;
 class VigReactionsTable extends TableAbstract
 {
 
-    /**
-     * @var bool
-     */
     protected $hasActions = true;
 
-    /**
-     * @var bool
-     */
     protected $hasFilter = true;
 
-    /**
-     * VigReactionsTable constructor.
-     * @param DataTables $table
-     * @param UrlGenerator $urlGenerator
-     * @param VigReactionsInterface $vigReactionsRepository
-     */
     public function __construct(DataTables $table, UrlGenerator $urlGenerator, VigReactionsInterface $vigReactionsRepository)
     {
         $this->repository = $vigReactionsRepository;
@@ -42,9 +30,6 @@ class VigReactionsTable extends TableAbstract
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function ajax(): JsonResponse
     {
         $data = $this->table
@@ -69,9 +54,6 @@ class VigReactionsTable extends TableAbstract
         return $this->toJson($data);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function query()
     {
         $model = $this->repository->getModel();
@@ -88,9 +70,6 @@ class VigReactionsTable extends TableAbstract
         return $this->applyScopes($query);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function columns()
     {
         return [
@@ -116,17 +95,6 @@ class VigReactionsTable extends TableAbstract
         ];
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function buttons()
-    {
-        // return $this->addCreateButton(route('vig-reactions.create'), 'vig-reactions.create');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function bulkActions(): array
     {
         return $this->addDeleteAction(
@@ -136,9 +104,6 @@ class VigReactionsTable extends TableAbstract
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getBulkChanges(): array
     {
         return [
