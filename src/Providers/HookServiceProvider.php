@@ -3,9 +3,9 @@
 namespace Botble\VigReactions\Providers;
 
 use Assets;
-use Illuminate\Support\ServiceProvider;
 use Botble\Dashboard\Supports\DashboardWidgetInstance;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\ServiceProvider;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -22,25 +22,25 @@ class HookServiceProvider extends ServiceProvider
 
         theme_option()
             ->setSection([
-                'title'      => 'Vig Reactions',
-                'desc'       => 'Theme options for Vig Reactions',
-                'id'         => 'opt-vig-reactions',
+                'title' => 'Vig Reactions',
+                'desc' => 'Theme options for Vig Reactions',
+                'id' => 'opt-vig-reactions',
                 'subsection' => true,
-                'icon'       => 'fa fa-edit',
-                'fields'     => [
+                'icon' => 'fa fa-edit',
+                'fields' => [
                     [
-                        'id'         => 'vig_reactions_style',
-                        'type'       => 'customSelect',
-                        'label'      => 'Style',
+                        'id' => 'vig_reactions_style',
+                        'type' => 'customSelect',
+                        'label' => 'Style',
                         'attributes' => [
-                            'name'    => 'vig_reactions_style',
-                            'list'    => [
+                            'name' => 'vig_reactions_style',
+                            'list' => [
                                 '1' => 'Full Option',
                                 '2' => 'Simple More',
                                 '3' => 'Simple More Small',
                                 '4' => 'Same Github',
                             ],
-                            'value'   => '',
+                            'value' => '',
                             'options' => [
                                 'class' => 'form-control',
                             ],
@@ -63,6 +63,9 @@ class HookServiceProvider extends ServiceProvider
         $reactionTypes = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
 
         $data = json_decode($content);
+        if (! $data) {
+            return null;
+        }
 
         return view('plugins/vig-reactions::style-' . $style, compact('content', 'reactionTypes', 'data'));
     }
@@ -74,7 +77,7 @@ class HookServiceProvider extends ServiceProvider
      */
     public function registerDashboardWidgetsRecent($widgets, $widgetSettings)
     {
-        if (!Auth::user()->hasPermission('vig-reactions.index')) {
+        if (! Auth::user()->hasPermission('vig-reactions.index')) {
             return $widgets;
         }
 
@@ -99,7 +102,7 @@ class HookServiceProvider extends ServiceProvider
      */
     public function registerDashboardWidgetsPopular($widgets, $widgetSettings)
     {
-        if (!Auth::user()->hasPermission('vig-reactions.index')) {
+        if (! Auth::user()->hasPermission('vig-reactions.index')) {
             return $widgets;
         }
 
@@ -116,5 +119,4 @@ class HookServiceProvider extends ServiceProvider
             ->setColumn('col-md-6 col-sm-6')
             ->init($widgets, $widgetSettings);
     }
-
 }
