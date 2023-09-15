@@ -6,7 +6,7 @@ $(document).ready(function () {
     let reaction_type = $('#vig-reaction').data('type');
 
     $.ajax({
-        url: "reaction/get-reaction",
+        url: window.VigReaction.get,
         method: 'POST',
         data: {
             _token: $("meta[name='csrf-token']").attr("content"),
@@ -37,7 +37,7 @@ $('#vig-reaction').on('click', '.vigreaction', function () {
     let reaction_id = $('#vig-reaction').data('id');
     let reaction_type = $('#vig-reaction').data('type');
     $.ajax({
-        url: "reaction/press-reaction",
+        url: window.VigReaction.press,
         method: 'POST',
         data: {
             _token: $("meta[name='csrf-token']").attr("content"),

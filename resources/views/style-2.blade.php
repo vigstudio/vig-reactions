@@ -14,9 +14,16 @@
     @endforeach
 </div>
 
+<script>
+    window.VigReaction = {
+        get: "{{ route('vig.reaction.get') }}",
+        press: "{{ route('vig.reaction.press') }}",
+    };
+</script>
+
 @php
-    Theme::asset()->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-2/style.css', [], [], '1.0.0');
+    Theme::asset()->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-2/style.css', [], [], '1.0.1');
     Theme::asset()
         ->container('footer')
-        ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-2/scripts.js', [], [], '1.0.0');
+        ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-2/scripts.js', [], [], '1.0.1');
 @endphp

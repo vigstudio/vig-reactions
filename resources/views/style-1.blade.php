@@ -1,10 +1,10 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="dw-reactions-3" style="padding-top: 20px" id="vig-reaction"
-        data-total="0"
-        data-id="{{ $data->reference_id }}"
-        data-type="{{ $data->reference_type }}">
-    @foreach($reactionTypes as $reaction)
+     data-total="0"
+     data-id="{{ $data->reference_id }}"
+     data-type="{{ $data->reference_type }}">
+    @foreach ($reactionTypes as $reaction)
         <div class="dw-reactions-box-3">
             <div class="box-reaction">
                 <div class="dw-reactions-percent" id="vig-percent-{{ $reaction }}">
@@ -19,10 +19,16 @@
     @endforeach
 </div>
 
+<script>
+    window.VigReaction = {
+        get: "{{ route('vig.reaction.get') }}",
+        press: "{{ route('vig.reaction.press') }}",
+    };
+</script>
+
 @php
+    Theme::asset()->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-1/style.css', [], [], '1.1.2');
     Theme::asset()
-             ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-1/style.css', [], [], '1.1.1');
-    Theme::asset()
-            ->container('footer')
-            ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-1/scripts.js', [], [], '1.1.0');
+        ->container('footer')
+        ->add('vig-reaction', 'vendor/core/plugins/vig-reactions/style-1/scripts.js', [], [], '1.1.2');
 @endphp

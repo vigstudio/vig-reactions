@@ -11,8 +11,16 @@ function callReaction(type, route) {
     let reaction_id = $('#vig-reaction').data('id');
     let reaction_type = $('#vig-reaction').data('type');
 
+    if (route == 'get') {
+        var getRoute = window.VigReaction.get;
+    }
+
+    if (route == 'press') {
+        var getRoute = window.VigReaction.press;
+    }
+
     $.ajax({
-        url: 'reaction/' + route + '-reaction',
+        url: getRoute,
         method: 'POST',
         data: {
             _token: $("meta[name='csrf-token']").attr("content"),
